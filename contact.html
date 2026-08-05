@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact & Reservations | The Third Space</title>
+<meta name="description" content="Reserve a seat at Roza or inquire about a private buyout, catering, or event at The Third Space, Atlanta.">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="wordmark">the <span>third</span> space</a>
+    <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="contact.html?type=roza">Reservations</a></li>
+      <li><a href="private-events.html">Private Events</a></li>
+      <li><a href="roza.html">Roza</a></li>
+      <li><a href="catering.html">Catering</a></li>
+      <li><a href="directions.html">Directions</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-image" style="background-image:url('assets/images/open-kitchen-counter.jpg');"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="eyebrow">Reservations & Inquiries</span>
+    <h1>There's always a seat at the table for you.</h1>
+    <p class="lede">Reserve a seat at Roza, or tell us about a private event: buyout or catering. We'll follow up directly.</p>
+  </div>
+  <span class="scroll-cue">Scroll</span>
+</section>
+
+<section class="block">
+  <div class="wrap" style="max-width:720px; margin:0 auto;">
+
+    <div class="type-toggle">
+      <button type="button" data-target="roza" class="active">Reserve a Seat (Roza)</button>
+      <button type="button" data-target="event">Book Private Event / Catering</button>
+    </div>
+
+    <div class="form-card" id="form-roza">
+      <form data-mailto-subject="Roza Reservation Request">
+        <div class="field-row">
+          <div class="field">
+            <label for="r-name">Name</label>
+            <input id="r-name" name="Name" type="text" required>
+          </div>
+          <div class="field">
+            <label for="r-email">Email</label>
+            <input id="r-email" name="Email" type="email" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="r-phone">Phone</label>
+            <input id="r-phone" name="Phone" type="tel" required>
+          </div>
+          <div class="field">
+            <label for="r-date">Preferred Date</label>
+            <input id="r-date" name="Preferred Date" type="date" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="r-party">Party Size</label>
+          <input id="r-party" name="Party Size" type="number" min="1" max="20" required>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="r-price">Choose Your Menu Price *</label>
+            <select id="r-price" name="Menu Price" required>
+              <option value="">Select one</option>
+              <option>$250: Unlimited Ultimate Experience</option>
+              <option>$200: 8-10 Courses</option>
+              <option>$175: 6-8 Courses</option>
+              <option>$125: 3 Courses</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="r-diet">Dietary Preferences or Restrictions</label>
+            <select id="r-diet" name="Dietary Preferences">
+              <option value="">Select one</option>
+              <option>None</option>
+              <option>Vegetarian</option>
+              <option>Vegan</option>
+              <option>Gluten-Free</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="r-heard">How Did You Hear About Us?</label>
+          <input id="r-heard" name="How Did You Hear About Us" type="text">
+        </div>
+        <div class="field">
+          <label for="r-msg">Message</label>
+          <textarea id="r-msg" name="Message" placeholder="Dietary notes, special occasion, anything we should know."></textarea>
+        </div>
+        <button type="submit" class="btn btn-solid">Send Reservation Request</button>
+        <div class="form-msg"></div>
+      </form>
+    </div>
+
+    <div class="form-card" id="form-event" style="display:none;">
+      <form data-mailto-subject="Private Event / Catering Inquiry">
+        <div class="field-row">
+          <div class="field">
+            <label for="e-name">Name</label>
+            <input id="e-name" name="Name" type="text" required>
+          </div>
+          <div class="field">
+            <label for="e-email">Email</label>
+            <input id="e-email" name="Email" type="email" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="e-phone">Phone</label>
+            <input id="e-phone" name="Phone" type="tel" required>
+          </div>
+          <div class="field">
+            <label for="e-date">Event Date</label>
+            <input id="e-date" name="Event Date" type="date" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="e-guests">Estimated Guest Count</label>
+            <input id="e-guests" name="Estimated Guest Count" type="number" min="1" required>
+          </div>
+          <div class="field">
+            <label for="e-type">Event Type</label>
+            <select id="e-type" name="Event Type" required>
+              <option value="">Select one</option>
+              <option>Wedding</option>
+              <option>Corporate</option>
+              <option>Celebration</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="e-format">Format</label>
+          <select id="e-format" name="Format" required>
+            <option value="">Select one</option>
+            <option>On-Site Buyout</option>
+            <option>Offsite Catering</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="e-msg">Message</label>
+          <textarea id="e-msg" name="Message" placeholder="Tell us about your vision, budget, and anything else we should know."></textarea>
+        </div>
+        <button type="submit" class="btn btn-solid">Send Inquiry</button>
+        <div class="form-msg"></div>
+      </form>
+    </div>
+
+    <p class="field-note" style="margin-top:24px; text-align:center;">Prefer to skip the form? Reach us directly at <a href="mailto:thirdspaceatlanta@gmail.com" style="color:var(--gold);">thirdspaceatlanta@gmail.com</a> or <a href="tel:4707891901" style="color:var(--gold);">470.789.1901</a>.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>The Third Space</h4>
+        <p>A chef-led culinary event space tucked off Auburn Ave in Atlanta. Nightly tastings. Private buyouts. By reservation only.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <a href="directions.html">659 Auburn Ave NE, Suite 503<br>Atlanta, GA 30312</a>
+        <a href="tel:4707891901">470.789.1901</a>
+        <a href="mailto:thirdspaceatlanta@gmail.com">thirdspaceatlanta@gmail.com</a>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="roza.html">Roza</a>
+        <a href="private-events.html">Private Events</a>
+        <a href="catering.html">Catering</a>
+        <a href="https://instagram.com/third.space.atlanta">Instagram: @third.space.atlanta</a>
+        <a href="https://tiktok.com/@thirdspaceatl">TikTok: @thirdspaceatl</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 The Third Space, Atlanta.</span>
+      <span>Open 7 days, by reservation only.</span>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
