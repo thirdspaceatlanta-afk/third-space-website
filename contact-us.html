@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Catering | The Third Space</title>
-<meta name="description" content="Offsite catering from The Third Space. Bold flavors and top-tier presentation, working directly with Chef Shai Lavi, delivered to your location.">
+<title>Contact Us | The Third Space</title>
+<meta name="description" content="Get in touch with The Third Space, Atlanta. Questions about Roza, private events, or catering, we're happy to help.">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -18,24 +18,21 @@
       <li><a href="contact.html?type=roza">Reservations</a></li>
       <li><a href="private-events.html">Private Events</a></li>
       <li><a href="roza.html">Roza</a></li>
-      <li><a href="catering.html" class="active">Catering</a></li>
+      <li><a href="catering.html">Catering</a></li>
       <li><a href="gallery.html">Gallery</a></li>
       <li><a href="directions.html">Directions</a></li>
-      <li><a href="contact-us.html">Contact</a></li>
+      <li><a href="contact-us.html" class="active">Contact</a></li>
     </ul>
   </nav>
 </header>
 
 <section class="hero">
-  <video class="hero-video" autoplay muted loop playsinline poster="assets/video/catering-hero-poster.jpg">
-    <source src="assets/video/catering-hero.mp4" type="video/mp4">
-  </video>
+  <div class="hero-image" style="background-image:url('assets/images/contact-hero.jpg');"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <span class="eyebrow">Offsite</span>
-    <h1>Catering</h1>
-    <p class="lede">Bringing culinary excellence to you. Bold flavors, top-tier presentation, from intimate in-home dinners to corporate galas.</p>
-    <a href="contact.html?type=event" class="btn btn-solid" style="margin-top:20px;">Cater Your Event</a>
+    <span class="eyebrow">Get In Touch</span>
+    <h1>Contact Us</h1>
+    <p class="lede">Questions about Roza, private events, or catering? We're happy to help.</p>
   </div>
   <span class="scroll-cue">Scroll</span>
 </section>
@@ -43,21 +40,34 @@
 <section class="block" style="position:relative;">
   <div class="wrap two-col">
     <div>
-      <h3>How It Works</h3>
-      <h2>Your budget, your vision, Chef Shai Lavi's menu.</h2>
-      <p>Work directly with Chef Shai Lavi to design a menu around your budget and vision. Everything is sourced locally, based on the day's fresh, seasonal ingredients.</p>
-      <p>Any scale, any setting: intimate in-home dinners, corporate galas, and everything between.</p>
+      <h3>Reach Us Directly</h3>
+      <h2>We'd love to hear from you.</h2>
+      <ul class="list-plain">
+        <li><strong>Phone</strong><span><a href="tel:4707891901" style="color:var(--gold);">470.789.1901</a></span></li>
+        <li><strong>Email</strong><span><a href="mailto:thirdspacereservations@gmail.com" style="color:var(--gold);">thirdspacereservations@gmail.com</a></span></li>
+        <li><strong>Address</strong><span><a href="directions.html" style="color:var(--gold);">659 Auburn Ave NE, Suite 503, Atlanta, GA 30312</a></span></li>
+        <li><strong>Hours</strong><span>Open 7 days, by reservation only</span></li>
+      </ul>
+      <p style="margin-top:24px;">Looking to reserve a seat at Roza or inquire about a private event? Head to <a href="contact.html?type=roza" style="color:var(--gold);">Reservations</a> instead, it'll get you straight to the right form.</p>
     </div>
-    <div class="photo-block" style="background-image:url('assets/images/catering-photo.jpg');"></div>
-  </div>
-</section>
-
-<section class="block">
-  <div class="wrap" style="max-width:720px; text-align:center; margin:0 auto;">
-    <h3>Inquire</h3>
-    <h2>Let's design your menu.</h2>
-    <p>Tell us your date, headcount, and vision, and we'll follow up to talk details.</p>
-    <a href="contact.html?type=event" class="btn btn-solid" style="margin-top:12px;">Go to Inquiry Form</a>
+    <div class="form-card">
+      <form data-mailto-subject="General Inquiry">
+        <div class="field">
+          <label for="c-name">Name</label>
+          <input id="c-name" name="Name" type="text" required>
+        </div>
+        <div class="field">
+          <label for="c-email">Email</label>
+          <input id="c-email" name="Email" type="email" required>
+        </div>
+        <div class="field">
+          <label for="c-msg">Message</label>
+          <textarea id="c-msg" name="Message" placeholder="How can we help?" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-solid">Send Message</button>
+        <div class="form-msg"></div>
+      </form>
+    </div>
   </div>
 </section>
 

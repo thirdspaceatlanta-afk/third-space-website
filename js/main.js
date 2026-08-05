@@ -33,14 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       const body = lines.join('\n');
-      const mailto = `mailto:thirdspaceatlanta@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const mailto = `mailto:thirdspacereservations@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
       window.location.href = mailto;
 
       if (msg) {
         msg.classList.remove('error');
         msg.classList.add('show');
-        msg.textContent = "Opening your email client with this inquiry pre-filled, just hit send. If nothing opens, email us directly at thirdspaceatlanta@gmail.com.";
+        msg.textContent = "Opening your email client with this inquiry pre-filled, just hit send. If nothing opens, email us directly at thirdspacereservations@gmail.com.";
       }
     });
   });
@@ -65,5 +65,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const requested = new URLSearchParams(window.location.search).get('type');
     if (requested === 'roza' || requested === 'event') activate(requested);
+  }
+
+  // Scroll progress bar
+  const progress = document.createElement('div');
+  progress.className = 'scroll-progress';
+  progress.innerHTML = '<div class="scroll-progress-bar"></div>';
+  document.body.appendChild(progress);
+  const progressBar = progress.querySelector('.scroll-progress-bar');
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const doc = document.documentElement;
+      const scrollable = doc.scrollHeight - doc.clientHeight;
+      const pct = scrollable > 0 ? (doc.scrollTop / scrollable) * 100 : 0;
+      progressBar.style.width = pct + '%';
+      ticking = false;
+    });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Scroll reveal
+  const revealSelectors = [
+    '.two-col > div', '.teaser', '.split-card', '.stat',
+    '.gallery-grid figure', '.form-card', '.photo-block',
+    'section.block > .wrap > h2', 'section.block > .wrap > h3',
+  ];
+  const revealEls = document.querySelectorAll(revealSelectors.join(','));
+  if (revealEls.length && 'IntersectionObserver' in window) {
+    revealEls.forEach((el) => el.classList.add('reveal'));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach((el) => io.observe(el));
   }
 });
