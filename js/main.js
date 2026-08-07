@@ -10,9 +10,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Generic form handler: validates, builds a mailto: to send the inquiry,
-  // and shows an inline confirmation (no backend/booking system yet).
-  document.querySelectorAll('form[data-mailto-subject]').forEach((form) => {
+  // Confirmation modal
+  const CONFIRMATION_MESSAGE = "Thank you for your enquiry, we have sent you an email acknowledging your enquiry and someone from our team will be in touch to discuss the request/reservation to formalize it for you.";
+
+  const modalOverlay = document.createElement('div');
+  modalOverlay.className = 'modal-overlay';
+  modalOverlay.innerHTML = `
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button type="button" class="modal-close" aria-label="Close">&times;</button>
+      <span class="eyebrow">Request Received</span>
+      <h3 id="modal-title">You're All Set</h3>
+      <p>${CONFIRMATION_MESSAGE}</p>
+    </div>
+  `;
+  document.body.appendChild(modalOverlay);
+  const closeModal = () => modalOverlay.classList.remove('show');
+  modalOverlay.querySelector('.modal-close').addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // Generic form handler: submits to Formspree via fetch, shows an inline
+  // confirmation, and pops up a matching confirmation modal.
+  document.querySelectorAll('form[data-form-subject]').forEach((form) => {
     const msg = form.querySelector('.form-msg');
 
     form.addEventListener('submit', (e) => {
@@ -23,25 +46,37 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      const submitBtn = form.querySelector('button[type="submit"]');
       const data = new FormData(form);
-      const subject = form.getAttribute('data-mailto-subject');
-      const lines = [];
-      form.querySelectorAll('[name]').forEach((field) => {
-        const label = field.closest('.field')?.querySelector('label')?.textContent?.trim() || field.name;
-        const value = data.get(field.name);
-        if (value) lines.push(`${label}: ${value}`);
-      });
+      data.append('_subject', form.getAttribute('data-form-subject'));
 
-      const body = lines.join('\n');
-      const mailto = `mailto:thirdspacereservations@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      if (submitBtn) submitBtn.disabled = true;
 
-      window.location.href = mailto;
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' },
+      })
+        .then((response) => {
+          if (!response.ok) throw new Error('Submission failed');
 
-      if (msg) {
-        msg.classList.remove('error');
-        msg.classList.add('show');
-        msg.textContent = "Opening your email client with this inquiry pre-filled, just hit send. If nothing opens, email us directly at thirdspacereservations@gmail.com.";
-      }
+          if (msg) {
+            msg.classList.remove('error');
+            msg.classList.add('show');
+            msg.textContent = CONFIRMATION_MESSAGE;
+          }
+          modalOverlay.classList.add('show');
+          form.reset();
+        })
+        .catch(() => {
+          if (msg) {
+            msg.classList.add('show', 'error');
+            msg.textContent = "Something went wrong sending your request. Please email us directly at thirdspacereservations@gmail.com.";
+          }
+        })
+        .finally(() => {
+          if (submitBtn) submitBtn.disabled = false;
+        });
     });
   });
 
