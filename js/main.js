@@ -1,5 +1,16 @@
 // The Third Space: shared behavior
 
+// --- EmailJS config ---
+const EMAILJS_PUBLIC_KEY = '3y_aw8UjGmN4Fil80';
+const EMAILJS_SERVICE_ID = 'service_ztu24sk';
+const EMAILJS_TEMPLATE_BUSINESS = 'template_cm040lu';
+const EMAILJS_TEMPLATE_CUSTOMER = 'template_8uphj66';
+// -----------------------
+
+if (window.emailjs) {
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // Mobile nav toggle
   const toggle = document.querySelector('.nav-toggle');
@@ -33,8 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') closeModal();
   });
 
-  // Generic form handler: submits to Formspree via fetch, shows an inline
-  // confirmation, and pops up a matching confirmation modal.
+  // Generic form handler: sends two emails via EmailJS (one notification to
+  // the business, one autoresponse confirmation to the customer), shows an
+  // inline confirmation, and pops up a matching confirmation modal.
   document.querySelectorAll('form[data-form-subject]').forEach((form) => {
     const msg = form.querySelector('.form-msg');
 
@@ -48,18 +60,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const submitBtn = form.querySelector('button[type="submit"]');
       const data = new FormData(form);
-      data.append('_subject', form.getAttribute('data-form-subject'));
+      const subject = form.getAttribute('data-form-subject');
+      const toEmail = form.querySelector('[type="email"]')?.value || '';
+      const toName = form.querySelector('[name="Name"]')?.value || '';
+
+      const lines = [];
+      form.querySelectorAll('[name]').forEach((field) => {
+        const label = field.closest('.field')?.querySelector('label')?.textContent?.trim() || field.name;
+        const value = data.get(field.name);
+        if (value) lines.push(`${label}: ${value}`);
+      });
+
+      const templateParams = {
+        subject,
+        to_name: toName,
+        to_email: toEmail,
+        message: lines.join('\n'),
+      };
 
       if (submitBtn) submitBtn.disabled = true;
 
-      fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { Accept: 'application/json' },
-      })
-        .then((response) => {
-          if (!response.ok) throw new Error('Submission failed');
-
+      Promise.all([
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_BUSINESS, templateParams),
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_CUSTOMER, templateParams),
+      ])
+        .then(() => {
           if (msg) {
             msg.classList.remove('error');
             msg.classList.add('show');
