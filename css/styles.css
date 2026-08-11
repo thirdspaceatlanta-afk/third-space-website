@@ -80,12 +80,15 @@ p { margin: 0 0 1em; color: var(--ink-dim); }
   margin: 0 auto;
 }
 .wordmark {
-  font-family: var(--serif);
-  font-size: 1.25rem;
-  letter-spacing: 0.04em;
-  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
 }
-.wordmark span { color: var(--gold); }
+.wordmark img {
+  height: 26px;
+  width: auto;
+  display: block;
+}
 
 .nav-links {
   display: flex;
@@ -494,6 +497,7 @@ section.block.tight { padding: 64px 0; }
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
   .hero { min-height: 68vh; }
+  .wordmark img { height: 20px; }
   .nav-links { display: none; }
   .nav-toggle { display: inline-block; }
   .nav-links.open {
