@@ -44,6 +44,7 @@
     <div class="type-toggle">
       <button type="button" data-target="roza" class="active">Reserve a Seat (Roza)</button>
       <button type="button" data-target="event">Book Private Event / Catering</button>
+      <button type="button" data-target="mealprep">Meal Prep</button>
     </div>
 
     <div class="form-card" id="form-roza">
@@ -159,6 +160,48 @@
           <textarea id="e-msg" name="Message" placeholder="Tell us about your vision, budget, and anything else we should know."></textarea>
         </div>
         <button type="submit" class="btn btn-solid">Send Inquiry</button>
+        <div class="form-msg"></div>
+      </form>
+    </div>
+
+    <div class="form-card" id="form-mealprep" style="display:none;">
+      <form data-form-subject="Meal Prep Inquiry">
+        <div class="field-row">
+          <div class="field">
+            <label for="m-name">Name</label>
+            <input id="m-name" name="Name" type="text" required>
+          </div>
+          <div class="field">
+            <label for="m-email">Email</label>
+            <input id="m-email" name="Email" type="email" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="m-phone">Phone</label>
+            <input id="m-phone" name="Phone" type="tel" required>
+          </div>
+          <div class="field">
+            <label for="m-diet">Dietary Preferences or Restrictions</label>
+            <select id="m-diet" name="Dietary Preferences">
+              <option value="">Select one</option>
+              <option>None</option>
+              <option>Vegetarian</option>
+              <option>Vegan</option>
+              <option>Gluten-Free</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="m-heard">How Did You Hear About Us?</label>
+          <input id="m-heard" name="How Did You Hear About Us" type="text">
+        </div>
+        <div class="field">
+          <label for="m-notes">Notes</label>
+          <textarea id="m-notes" name="Notes" placeholder="Tell us what you are looking for, how many meals, and anything else we should know."></textarea>
+        </div>
+        <button type="submit" class="btn btn-solid">Send Meal Prep Inquiry</button>
         <div class="form-msg"></div>
       </form>
     </div>

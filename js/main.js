@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const panels = {
       roza: document.getElementById('form-roza'),
       event: document.getElementById('form-event'),
+      mealprep: document.getElementById('form-mealprep'),
     };
     const activate = (target) => {
       toggleBtns.forEach((b) => b.classList.toggle('active', b.getAttribute('data-target') === target));
@@ -124,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const requested = new URLSearchParams(window.location.search).get('type');
-    if (requested === 'roza' || requested === 'event') activate(requested);
+    if (Object.prototype.hasOwnProperty.call(panels, requested)) activate(requested);
   }
 
   // Scroll progress bar
